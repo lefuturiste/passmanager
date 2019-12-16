@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    min-width: 300px;
+    min-height: 280px;
+}
+
+form {
+    margin-bottom: 0;
+}
+
+.app {
+    padding: 1em;
+}
+
+.main-password-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-field {
+    display: block;
+    font-size: 1.1em;
+    padding-left: 1em;
+}
+
+.field-container {
+    margin-bottom: 1em;
+}
+
+.main-password-input {
+    margin-bottom: 0;
+}
+
+.host-field,
+.login-field {
+    width: 100%;
+}
+
+.main-password-icon {
+    margin-right: 1em;
+    font-size: 1.5em;
+}
+
+.main-password-icons {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.main-password-icon:last-of-type {
+    margin-right: 0;
+}
+
+.main-password-icons-container {
+    display: flex;
+    justify-content: center;
+}
+
+.generate-button button {
+    width: 100%;
+    transition: all 0.2s;
+    background: #3498db;
+    color: white;
+    border: 0;
+    margin-bottom: 0;
+}
+
+.generate-button button:focus {
+    box-shadow: 0 0 18px 1px #297fb96c;
+}
+
+.generated-password-container {
+    display: grid;
+    grid-template-columns: 14% 68% 14%;
+    grid-column-gap: 2%;
+}
+
+.generated-password-container button, .generated-password-container input {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+@media(max-width: 549px) {
+    .main-password-icons-container {
+        margin-top: 1em
+    }
+}
+
+.input-blur {
+    filter: blur(5px);
+}
+
+.icon-button {
+    font-size: 1em;
+    padding: 0;
+}
+
