@@ -2,7 +2,7 @@
   <div class="app">
     <form>
       <div class="field-container">
-        <input class="input-field host-field" placeholder="Host" v-focus v-model="host" type="text">
+        <input class="input-field host-field" placeholder="Host" v-model="host" type="text">
       </div>
       <div class="field-container">
         <input class="input-field login-field" placeholder="Login" v-model="login" type="text">
@@ -11,6 +11,7 @@
         <input
           class="eight columns input-field main-password-input"
           v-model="mainPassword"
+          v-focus="login.length !== 0"
           :type="hidePassword ? 'password' : 'text'"
           placeholder="Main Password" />
         <div class="four columns" v-if="mainPassword.length > 0">
@@ -84,9 +85,20 @@ export default {
     }
   },
   data () {
-    return { host: '', login: '', mainPassword: '', icons: [], hidePassword: true, generatedPassword: '', hideGeneratedPassword: false }
+    return {
+      host: '',
+      login: '',
+      mainPassword: '',
+      icons: [],
+      hidePassword: true,
+      generatedPassword: '',
+      hideGeneratedPassword: false
+    }
   },
   watch: {
+    login (value) {
+      localStorage.setItem('passmanager_login', value)
+    },
     mainPassword (value) {
       if (value.length === 0) {
         this.icons = []
@@ -110,7 +122,18 @@ export default {
     }
   },
   mounted () {
-    console.log('mounted')
+    window.chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      let hostname = new URL(tabs[0].url).hostname
+      let splitedHostname = hostname.split('.')
+      if (splitedHostname.length > 2) {
+        this.host = splitedHostname[splitedHostname.length - 2] + '.' + splitedHostname[splitedHostname.length - 1]
+      } else {
+        this.host = hostname
+      }
+    })
+    if (localStorage.getItem('passmanager_login') !== null) {
+      this.login = localStorage.getItem('passmanager_login')
+    }
   },
   methods: {
     togglePasswordVisibility () {
